@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { Analysis, InsertAnalysis, InsertUser, analyses, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,29 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+export async function createAnalysis(input: InsertAnalysis): Promise<Analysis | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.insert(analyses).values(input);
+  const insertedId = Number(result[0].insertId);
+  const rows = await db.select().from(analyses).where(eq(analyses.id, insertedId)).limit(1);
+  return rows[0];
+}
+
+export async function listAnalysesByUser(userId: number): Promise<Analysis[]> {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(analyses).where(eq(analyses.userId, userId)).orderBy(desc(analyses.createdAt));
+}
+
+export function canAccessAnalysis(requestingUserId: number, analysisOwnerId: number) {
+  return requestingUserId === analysisOwnerId;
+}
+
+export async function getAnalysisById(userId: number, id: number): Promise<Analysis | undefined> {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db.select().from(analyses).where(eq(analyses.id, id)).limit(1);
+  const row = rows[0];
+  return row && canAccessAnalysis(userId, row.userId) ? row : undefined;
+}

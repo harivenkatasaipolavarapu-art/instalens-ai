@@ -1,0 +1,23 @@
+# Project TODO
+
+- [x] Create the polished landing page with Instagram profile URL input and clear analysis CTA
+- [x] Define database schema for saved analyses and structured Business DNA reports
+- [x] Implement public-profile input validation and permitted public-signal analysis flow
+- [x] Integrate server-side LLM generation for structured Business DNA reports
+- [x] Add exact score dimensions: Clarity, Trust, Consistency, Discoverability, and Conversion Readiness
+- [x] Add explanations for every score dimension
+- [x] Add content theme map with product showcase, testimonials, promotions, and related labels
+- [x] Add customer persona generator with explicit AI inference labeling
+- [x] Add prioritized action recommendations such as add pricing highlight and clearer CTA
+- [x] Add authenticated analysis history page with revisit flow
+- [x] Add report detail/dashboard experience
+- [x] Add structured PDF export for Business DNA Reports
+- [x] Add responsive and accessible empty, loading, and error states
+- [x] Add Vitest coverage for validation, report generation shape, history access, and export behavior
+- [x] Run typecheck, tests, and visual browser verification
+- [x] Save final checkpoint after all completed items are marked [x]
+- [x] Carry the lens/signals/decisions visual system into the unauthenticated history state and utility routes
+- [x] Implement structured public-signal extraction for bio, contact info, captions, and hashtags, and store them explicitly in sourceSignals
+- [x] Replace print-based export with a true PDF generation/download flow for Business DNA Reports
+- [x] Add explicit loading and error states for selected history detail and history query failures
+- [x] Add Vitest tests for Business DNA report schema/shape, protected history retrieval, and PDF export behavior
