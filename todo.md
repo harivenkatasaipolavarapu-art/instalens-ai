@@ -72,3 +72,13 @@
 - [x] Add a shared comparison chart-data helper and test it for 2+ accounts and all five dimensions
 - [x] Verify the updated History page at mobile width
 - [x] Save a fresh checkpoint after the History/scoring fixes
+
+## Agency Workspace Simplification
+
+- [x] Remove the Batch triage + client-ready output section from Agency
+- [x] Add a timeline graph showing score changes across saved re-analysis snapshots
+- [x] Add Top 10 and Top 50 ranked views using saved analyses only, with clear scope labeling
+- [x] Add tests for timeline data and ranked saved-profile lists
+- [x] Verify Agency layout responsively and save a new checkpoint
+- [x] Verify the simplified Agency page at mobile width
+- [x] Save a fresh checkpoint after the Agency Workspace simplification is verified
