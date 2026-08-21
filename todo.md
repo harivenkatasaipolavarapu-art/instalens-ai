@@ -120,3 +120,13 @@
 - [x] Add Medium and Low confidence filter assertions
 - [x] Re-run typecheck and tests after expanding confidence coverage
 - [x] Save the final discovery enhancement checkpoint
+
+## Discovery UI Polish
+
+- [x] Separate category/location scope inputs from optional approved URL dataset input
+- [x] Fix discovery input presentation so values never appear in the wrong field
+- [x] Replace oversized provider notice with a compact informational callout
+- [x] Improve discovery CTA hierarchy, spacing, and results controls
+- [x] Verify the discovery section at desktop and mobile widths
+- [x] Save a new checkpoint after the UI polish
+- [ ] Save a fresh checkpoint after the Discovery UI Polish changes
