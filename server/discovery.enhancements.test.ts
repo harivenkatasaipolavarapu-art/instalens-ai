@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { filterDiscoveryRows, formatDiscoveryCsv, getEvidenceConfidence } from "../shared/discovery";
+import { filterDiscoveryRows, formatDiscoveryCsv, getEvidenceConfidence, reportConfidenceLabel } from "../shared/discovery";
 
 describe("discovery enhancements", () => {
   it("derives evidence confidence from available public signals", () => {
@@ -16,6 +16,12 @@ describe("discovery enhancements", () => {
     expect(filterDiscoveryRows([high, low, below], 0, "High")).toEqual([high, below]);
     expect(filterDiscoveryRows([high, medium, low], 0, "Medium")).toEqual([medium]);
     expect(filterDiscoveryRows([high, medium, low], 0, "Low")).toEqual([low]);
+  });
+
+  it("does not label rich source signals as insufficient evidence", () => {
+    const confidence = getEvidenceConfidence({ sourceSignals: { bio: "A detailed business bio", title: "Business", contactInfo: { links: ["site"], emails: ["hello@example.com"], phones: ["1234567890"] }, captions: ["one", "two", "three"], hashtags: ["#one", "#two", "#three"] } });
+    expect(confidence).not.toBe("Low");
+    expect(reportConfidenceLabel({ bio: "A detailed business bio", title: "Business", contactInfo: { links: ["site"], emails: ["hello@example.com"], phones: ["1234567890"] }, captions: ["one", "two", "three"], hashtags: ["#one", "#two", "#three"] })).toBe("High evidence confidence");
   });
 
   it("formats all five scores into a CSV export", () => {

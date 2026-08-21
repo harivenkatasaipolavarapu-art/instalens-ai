@@ -13,6 +13,11 @@ export function getEvidenceConfidence(row: any): "High" | "Medium" | "Low" {
   return count >= 4 ? "High" : count >= 2 ? "Medium" : "Low";
 }
 
+export function reportConfidenceLabel(sourceSignals: any) {
+  const confidence = getEvidenceConfidence({ sourceSignals });
+  return confidence === "Low" ? "Insufficient public evidence" : `${confidence} evidence confidence`;
+}
+
 export function filterDiscoveryRows(rows: any[], minimumScore: number, confidence: "All" | "High" | "Medium" | "Low") {
   return rows.filter(row => (row.average ?? 0) >= minimumScore && (confidence === "All" || getEvidenceConfidence(row) === confidence));
 }

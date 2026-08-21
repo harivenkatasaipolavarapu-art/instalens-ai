@@ -130,3 +130,29 @@
 - [x] Verify the discovery section at desktop and mobile widths
 - [x] Save a new checkpoint after the UI polish
 - [x] Save a fresh checkpoint after the Discovery UI Polish changes
+
+## Identical Score Bug
+
+- [x] Trace why different profiles produce identical score inputs or fallback scores
+- [x] Ensure profile-specific extracted signals influence all five score dimensions
+- [x] Add insufficient-evidence confidence state instead of misleading identical scores
+- [x] Add regression tests proving different evidence produces different scores
+- [x] Verify comparison and discovery UI show score confidence clearly
+- [x] Save a new checkpoint after the score fix
+
+## Score Confidence Follow-ups
+
+- [x] Add an explicit insufficient-evidence badge/state tied to Low confidence
+- [x] Surface evidence confidence in comparison/history score views
+- [x] Verify confidence messaging visually across comparison and discovery surfaces
+- [x] Save a fresh checkpoint after the score-fix changes
+- [x] Add a visible History warning when saved profiles have insufficient public evidence and clustered scores
+- [x] Pass real sourceSignals into ReportView for reliable confidence badges
+- [x] Add a regression test for high-confidence report confidence behavior
+- [x] Save a new checkpoint after the score-fix and confidence UI changes
+- [x] Add a UI-level ReportView confidence-label regression test for high-confidence source signals
+- [x] Save a fresh checkpoint after the final score-confidence fixes
+- [x] Add a UI-level ReportView regression test for high-confidence source signals
+- [x] Save a new checkpoint after the final score-confidence changes
+- [x] Move the ReportView regression test into the active Vitest include pattern and rerun the suite
+- [x] Save a fresh checkpoint after the verified score-confidence changes
