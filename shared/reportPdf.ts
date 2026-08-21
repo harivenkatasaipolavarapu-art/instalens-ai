@@ -1,6 +1,6 @@
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
-export async function buildBusinessDnaPdf(report: any, profileUrl: string, average: number, username?: string | null) {
+export async function buildBusinessDnaPdf(report: any, profileUrl: string, average: number, username?: string | null, brandName = "InstaLens AI", logoDataUrl?: string) {
   const pdf = await PDFDocument.create();
   const page = pdf.addPage([612, 792]);
   const font = await pdf.embedFont(StandardFonts.Helvetica);
@@ -9,7 +9,8 @@ export async function buildBusinessDnaPdf(report: any, profileUrl: string, avera
   const green = rgb(0.12, 0.42, 0.27);
   let y = 744;
   const draw = (text: string, size = 11, isBold = false, color = ink) => { page.drawText(String(text).slice(0, 105), { x: 42, y, size, font: isBold ? bold : font, color }); y -= size + 8; };
-  draw("InstaLens AI — Business DNA Report", 22, true, green); draw(profileUrl, 9, false, rgb(0.4, 0.48, 0.42)); y -= 10;
+  if (logoDataUrl?.startsWith("data:image/")) { try { const image = logoDataUrl.startsWith("data:image/png") ? await pdf.embedPng(logoDataUrl) : await pdf.embedJpg(logoDataUrl); page.drawImage(image, { x: 478, y: 728, width: 92, height: 42 }); } catch { /* keep export usable when an invalid image is supplied */ } }
+  draw(`${brandName} — Business DNA Report`, 22, true, green); draw(profileUrl, 9, false, rgb(0.4, 0.48, 0.42)); y -= 10;
   draw(report.businessCategory ?? "Business profile", 18, true); draw(`Overall signal: ${average}/100`, 13, true, green); y -= 8;
   draw("Business DNA Score", 14, true, green);
   const dimensions = ["Clarity", "Trust", "Consistency", "Discoverability", "Conversion Readiness"];
@@ -21,6 +22,7 @@ export async function buildBusinessDnaPdf(report: any, profileUrl: string, avera
   return pdf.save();
 }
 
-export function reportPdfFilename(username?: string | null) {
-  return `instalens-${username ?? "business"}-report.pdf`;
+export function reportPdfFilename(username?: string | null, brandName?: string) {
+  const prefix = brandName?.trim() ? brandName.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : "instalens";
+  return `${prefix}-${username ?? "business"}-report.pdf`;
 }

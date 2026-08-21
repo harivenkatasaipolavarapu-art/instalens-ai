@@ -21,3 +21,36 @@
 - [x] Replace print-based export with a true PDF generation/download flow for Business DNA Reports
 - [x] Add explicit loading and error states for selected history detail and history query failures
 - [x] Add Vitest tests for Business DNA report schema/shape, protected history retrieval, and PDF export behavior
+
+## Agency Extensions
+
+- [x] Add comparison mode for 2–3 profiles using the same five Business DNA dimensions
+- [x] Add score ranking and side-by-side comparison explanations
+- [x] Add re-analysis over time with weekly/manual rerun and score delta tracking
+- [x] Add track-changes view with historical snapshots and impact narrative
+- [x] Add AI outreach message generator using persona and weak-dimension insights
+- [x] Add white-label PDF export with agency logo and branding fields
+- [x] Add batch mode for 5–10 URLs with ranked five-dimension score table
+- [x] Add CRM-ready lead card copy/export
+- [x] Add agency UX navigation, loading/error states, and responsive layouts
+- [x] Add Vitest coverage for comparison, score deltas, outreach, batch ranking, and lead export
+- [x] Save agency extension checkpoint after all items are complete
+
+## Agency Quality Follow-ups
+
+- [x] Add comparison insights explaining why profiles rank differently across each dimension
+- [x] Add a dedicated rerun action for selected history profiles and document manual cadence support
+- [x] Replace client template outreach with an LLM-backed outreach procedure
+- [x] Add a real white-label logo upload/reference and broader branding fields to PDF export
+- [x] Show all five dimension scores in the batch ranking table
+- [x] Surface loading and error feedback for compare, batch, and agency history actions
+- [x] Add Vitest tests for agency ranking, delta calculation, outreach procedure, batch shape, and lead-card copy
+- [x] Save a new agency extension checkpoint after all follow-ups pass
+
+## Final Agency Polish
+
+- [x] Add explicit copy documenting manual weekly re-analysis cadence
+- [x] Render an uploaded white-label logo image inside the exported PDF
+- [x] Add explicit batch loading and history loading states
+- [x] Add testable outreach prompt construction and batch output-shape coverage
+- [x] Save a fresh checkpoint after final agency polish

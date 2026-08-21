@@ -2,6 +2,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import History from "@/pages/History";
+import Agency from "@/pages/Agency";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -11,6 +12,7 @@ function Router() {
   return <Switch>
     <Route path="/" component={Home} />
     <Route path="/history" component={History} />
+    <Route path="/agency" component={Agency} />
     <Route path="/404" component={NotFound} />
     <Route component={NotFound} />
   </Switch>;

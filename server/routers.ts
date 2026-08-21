@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { invokeLLM } from "./_core/llm";
+import { buildOutreachPrompt } from "../shared/agencyUtils";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
@@ -169,6 +170,13 @@ export const appRouter = router({
       const analysis = await getAnalysisById(ctx.user.id, input.id);
       if (!analysis) throw new Error("Analysis not found.");
       return analysis;
+    }),
+    outreach: protectedProcedure.input(z.object({ profileUrl: z.string().url(), username: z.string().nullable().optional(), report: z.record(z.string(), z.any()) })).mutation(async ({ input }) => {
+      const response = await invokeLLM({ messages: [
+        { role: "system", content: "You write concise, respectful B2B outreach messages for an agency. Use only the supplied Business DNA report. Mention one genuine strength, one evidence-based improvement opportunity, and a low-pressure next step. Do not claim private information. Return only the message body." },
+        { role: "user", content: buildOutreachPrompt(input.profileUrl, input.username, input.report) },
+      ] });
+      return { message: messageText(response.choices?.[0]?.message?.content) };
     }),
   }),
 });
