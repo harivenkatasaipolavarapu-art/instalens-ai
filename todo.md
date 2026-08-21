@@ -129,4 +129,4 @@
 - [x] Improve discovery CTA hierarchy, spacing, and results controls
 - [x] Verify the discovery section at desktop and mobile widths
 - [x] Save a new checkpoint after the UI polish
-- [ ] Save a fresh checkpoint after the Discovery UI Polish changes
+- [x] Save a fresh checkpoint after the Discovery UI Polish changes
