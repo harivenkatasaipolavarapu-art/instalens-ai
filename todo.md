@@ -82,3 +82,20 @@
 - [x] Verify Agency layout responsively and save a new checkpoint
 - [x] Verify the simplified Agency page at mobile width
 - [x] Save a fresh checkpoint after the Agency Workspace simplification is verified
+
+## Top Profiles Discovery
+
+- [x] Add category and location scope inputs for profile discovery
+- [x] Add approved/supplied discovery dataset contract without fabricating global Instagram results
+- [x] Rank discovered profiles by the five deterministic Business DNA dimensions
+- [x] Add Top 10 and Top 50 discovery results with dataset-scope labeling
+- [x] Add filters and score rationale for discovered profiles
+- [x] Add tests for discovery ranking and scope handling
+- [x] Verify responsive discovery UX and save a new checkpoint
+
+## Discovery Quality Follow-ups
+
+- [x] Add an explicit Top 10 / Top 50 selector for discovery results
+- [x] Add expandable score rationale and evidence summary for discovered profiles
+- [x] Add discovery-specific scope validation and ranking tests
+- [x] Save a fresh checkpoint after discovery follow-ups are verified
