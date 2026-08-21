@@ -99,3 +99,24 @@
 - [x] Add expandable score rationale and evidence summary for discovered profiles
 - [x] Add discovery-specific scope validation and ranking tests
 - [x] Save a fresh checkpoint after discovery follow-ups are verified
+
+## Discovery Enhancements
+
+- [x] Add minimum Business DNA score filter
+- [x] Add evidence-confidence filter and confidence labels
+- [x] Add CSV export for scoped Top 10/Top 50 discovery results
+- [x] Add provider-ready empty state explaining automatic discovery requires an approved data source
+- [x] Add Vitest coverage for filters and CSV row formatting
+- [x] Verify responsive UX and save a fresh checkpoint
+
+## Final Discovery Enhancement Checks
+
+- [x] Add a dedicated automatic-discovery provider empty state with clear next-step copy
+- [x] Add tests for minimum score and evidence-confidence filtering behavior
+- [x] Save a new checkpoint after the discovery enhancement changes
+- [x] Add Vitest tests that verify minimum-score and High/Medium/Low confidence filtering
+- [x] Run typecheck and tests after adding the filter tests
+- [x] Save a fresh webdev checkpoint after the final discovery-enhancement changes
+- [x] Add Medium and Low confidence filter assertions
+- [x] Re-run typecheck and tests after expanding confidence coverage
+- [x] Save the final discovery enhancement checkpoint

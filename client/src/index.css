@@ -25,3 +25,6 @@
 
 .discovery-toggle{margin:14px 0}.discovery-toggle .muted{margin-left:auto}.discovery-item{background:#fff;border-bottom:1px solid #dce5d4}.discovery-row{width:100%;border:0;text-align:left;cursor:pointer;background:#fff}.discovery-row:hover{background:#f8fbf5}.discovery-rationale{padding:12px 18px 15px 66px;background:#f7faf4;border-top:1px solid #edf2e8;color:var(--muted);font-size:12px;line-height:1.5}.discovery-rationale b{color:var(--green-dark)}.discovery-rationale p{margin:5px 0}.discovery-item .discovery-row{border-bottom:0}
 @media(max-width:560px){.discovery-toggle .muted{width:100%;margin-left:0}.discovery-rationale{padding-left:18px}}
+
+.filter-label{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);white-space:nowrap}.filter-label input,.filter-label select{border:1px solid #cbd8c9;background:#fff;border-radius:6px;padding:6px 7px;color:var(--green-dark);font-size:12px}.discovery-row em{font-size:11px;white-space:nowrap}.discovery-toggle{align-items:center}.discovery-toggle .muted{font-size:11px}
+@media(max-width:900px){.discovery-toggle{align-items:flex-start}.filter-label{margin-top:6px}}
