@@ -2,6 +2,7 @@ import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import { Analysis, InsertAnalysis, InsertUser, analyses, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import { buildDeterministicScores } from "../shared/scoring";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -101,7 +102,8 @@ export async function createAnalysis(input: InsertAnalysis): Promise<Analysis | 
 export async function listAnalysesByUser(userId: number): Promise<Analysis[]> {
   const db = await getDb();
   if (!db) return [];
-  return db.select().from(analyses).where(eq(analyses.userId, userId)).orderBy(desc(analyses.createdAt));
+  const rows = await db.select().from(analyses).where(eq(analyses.userId, userId)).orderBy(desc(analyses.createdAt));
+  return rows.map(row => ({ ...row, report: { ...(row.report as any), scores: buildDeterministicScores(row.sourceSignals as any, row.report as any) } }));
 }
 
 export function canAccessAnalysis(requestingUserId: number, analysisOwnerId: number) {
@@ -113,5 +115,5 @@ export async function getAnalysisById(userId: number, id: number): Promise<Analy
   if (!db) return undefined;
   const rows = await db.select().from(analyses).where(eq(analyses.id, id)).limit(1);
   const row = rows[0];
-  return row && canAccessAnalysis(userId, row.userId) ? row : undefined;
+  return row && canAccessAnalysis(userId, row.userId) ? { ...row, report: { ...(row.report as any), scores: buildDeterministicScores(row.sourceSignals as any, row.report as any) } } : undefined;
 }

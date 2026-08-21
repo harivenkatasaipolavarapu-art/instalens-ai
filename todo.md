@@ -54,3 +54,21 @@
 - [x] Add explicit batch loading and history loading states
 - [x] Add testable outreach prompt construction and batch output-shape coverage
 - [x] Save a fresh checkpoint after final agency polish
+
+## History Comparison and Scoring Fixes
+
+- [x] Add multi-select comparison for two or more saved business accounts in History
+- [x] Add a visual comparison graph for Clarity, Trust, Consistency, Discoverability, and Conversion Readiness
+- [x] Add score explanations that distinguish evidence, inference, and missing signals
+- [x] Replace random-looking score generation with deterministic evidence-based scoring
+- [x] Add low-score guidance showing exactly what signals are missing or weak
+- [x] Add Vitest coverage for multi-account comparison data and deterministic score calculations
+- [x] Verify History graphs and score explanations responsively
+- [x] Save a new checkpoint after the comparison and scoring fixes
+
+## Final History Quality Checks
+
+- [x] Explicitly label Evidence, AI inference, and Missing signals in score explanations
+- [x] Add a shared comparison chart-data helper and test it for 2+ accounts and all five dimensions
+- [x] Verify the updated History page at mobile width
+- [x] Save a fresh checkpoint after the History/scoring fixes

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { invokeLLM } from "./_core/llm";
 import { buildOutreachPrompt } from "../shared/agencyUtils";
+import { buildDeterministicScores } from "../shared/scoring";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
@@ -131,6 +132,40 @@ async function collectPublicSignals(profileUrl: string) {
   }
 }
 
+export { buildDeterministicScores } from "../shared/scoring";
+
+/* legacy re-export boundary */
+/* scoring implementation lives in shared/scoring.ts */
+/* removed inline implementation */
+/* keep router focused on transport and persistence */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* @ts-ignore */
+function unusedScoringBoundary() {};
+
+/* scoring implementation is imported above */
+/* the old inline scorer is intentionally not used */
+/* END shared scoring boundary */
+
+/*
+
+  const bio = String(sourceSignals?.bio ?? "");
+  const captions = Array.isArray(sourceSignals?.captions) ? sourceSignals.captions : [];
+  const hashtags = Array.isArray(sourceSignals?.hashtags) ? sourceSignals.hashtags : [];
+  const contacts = sourceSignals?.contactInfo ?? {};
+  const links = Array.isArray(contacts.links) ? contacts.links : [];
+  const emails = Array.isArray(contacts.emails) ? contacts.emails : [];
+  const phones = Array.isArray(contacts.phones) ? contacts.phones : [];
+  const text = `${bio} ${captions.join(" ")} ${sourceSignals?.visibleTextSample ?? ""}`.toLowerCase();
+  const ctaTerms = ["dm", "message", "book", "order", "buy", "shop", "contact", "whatsapp", "call", "visit", "link"].filter(term => text.includes(term)).length;
+  const serviceTerms = Array.isArray(report?.services) ? report.services.length : 0;
+  const clarity = clampScore(35 + (bio.length >= 40 ? 22 : bio.length >= 15 ? 12 : 0) + (serviceTerms >= 3 ? 18 : serviceTerms >= 1 ? 10 : 0) + (sourceSignals?.title ? 8 : 0));
+  const trust = clampScore(30 + (emails.length ? 16 : 0) + (phones.length ? 16 : 0) + (links.length ? 12 : 0) + (captions.length >= 3 ? 10 : captions.length ? 5 : 0));
+  const consistency = clampScore(35 + (captions.length >= 6 ? 22 : captions.length >= 3 ? 14 : captions.length ? 7 : 0) + (hashtags.length >= 8 ? 18 : hashtags.length >= 3 ? 10 : 0) + (new Set(hashtags.map((tag: string) => tag.toLowerCase())).size >= 3 ? 8 : 0));
+  const discoverability = clampScore(28 + Math.min(34, hashtags.length * 3) + (text.includes("location") || text.includes("city") || text.includes("delivery") ? 16 : 0) + (sourceSignals?.title ? 8 : 0));
+  const conversion = clampScore(28 + (serviceTerms >= 2 ? 17 : serviceTerms ? 9 : 0) + Math.min(25, ctaTerms * 5) + (emails.length || phones.length || links.length ? 15 : 0));
+  const explain = (score: number, strong: string, weak: string) => `${score >= 70 ? strong : weak} Evidence used: ${bio ? "bio present" : "bio missing"}, ${captions.length} caption signal(s), ${hashtags.length} hashtag(s), ${emails.length + phones.length + links.length} contact path(s).`;
+*/
+
 function messageText(content: unknown) {
   if (typeof content === "string") return content;
   if (Array.isArray(content)) return content.map((item) => typeof item === "object" && item && "text" in item ? String((item as { text: unknown }).text) : "").join("");
@@ -162,6 +197,7 @@ export const appRouter = router({
       });
       const reportText = messageText(response.choices?.[0]?.message?.content);
       const report = JSON.parse(reportText);
+      report.scores = buildDeterministicScores(sourceSignals, report);
       const saved = await createAnalysis({ userId: ctx.user.id, profileUrl: input.profileUrl, username: sourceSignals.username, status: "completed", sourceSignals, report });
       return { analysis: saved ?? { id: 0, userId: ctx.user.id, profileUrl: input.profileUrl, username: sourceSignals.username, status: "completed", sourceSignals, report, createdAt: new Date(), updatedAt: new Date() } };
     }),
